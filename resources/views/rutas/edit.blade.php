@@ -24,20 +24,25 @@
                             id="descripcion_general{{ $ruta->id_ruta }}" value="{{ $ruta->descripcion_general }}">
                     </div>
 
+
+
                     <div class="mb-3">
                         @php
-                            $tipos = ['Diarios', 'Weekend'];
+                            $tipos = ['La Libertad', 'Amazonas', 'Cajamarca', 'Huaraz'];
                         @endphp
-                        <label for="tipo{{ $ruta->id_ruta }}" class="form-label">Tipo</label>
+                        <label for="tipo{{ $ruta->id_ruta }}" class="form-label">Departamento / Región</label>
                         <select name="tipo" id="tipo{{ $ruta->id_ruta }}" class="form-select" required>
-                            <option value="" disabled {{ $ruta->tipo ? '' : 'selected' }}>Selecciona una opción
-                            </option>
+                            <option value="" disabled {{ $ruta->tipo ? '' : 'selected' }}>Selecciona un
+                                departamento</option>
                             @foreach ($tipos as $tipo)
                                 <option value="{{ $tipo }}" {{ $ruta->tipo == $tipo ? 'selected' : '' }}>
-                                    {{ $tipo }}</option>
+                                    {{ $tipo }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
+
+
 
                     <div class="mb-3">
                         <label for="precio_regular{{ $ruta->id_ruta }}" class="form-label">Precio Regular</label>

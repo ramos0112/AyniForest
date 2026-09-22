@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruta;
 use Illuminate\Http\Request;
+use App\Models\TipoRuta;
 
 class HomeController extends Controller
 {
@@ -13,22 +14,38 @@ class HomeController extends Controller
         }
 
     public function home()
-        {
-            $rutas = Ruta::with('imagenes')->get();
-            $rutasWeekend  = Ruta::with('imagenes')->where('tipo', 'Weekend')->get();
-            $rutasDiarios  = Ruta::with('imagenes')->where('tipo', 'Diarios')->get();
+    {
+        $rutas = Ruta::with('imagenes')->get();
+        
+        // Consultas por departamento/región para las secciones de la Home
+        $rutasLaLibertad = Ruta::with('imagenes')->where('tipo', 'La Libertad')->get();
+        $rutasAmazonas   = Ruta::with('imagenes')->where('tipo', 'Amazonas')->get();
+        $rutasCajamarca  = Ruta::with('imagenes')->where('tipo', 'Cajamarca')->get();
+        $rutasHuaraz     = Ruta::with('imagenes')->where('tipo', 'Huaraz')->get();
 
-            return view('paguinas.home', compact('rutasWeekend', 'rutasDiarios', 'rutas'));
-        }
+        return view('paguinas.home', compact(
+            'rutas', 
+            'rutasLaLibertad', 
+            'rutasAmazonas', 
+            'rutasCajamarca', 
+            'rutasHuaraz'
+        ));
+    }
 
-        public function rutasPorTipo($tipo)
-        {
-            $rutas = Ruta::with('imagenes')
-                ->whereRaw('LOWER(tipo) = ?', [strtolower($tipo)])
-                ->get();
+    public function rutasPorTipo($tipo)
+    {
+        // Limpiamos espacios extra o guiones si vienen en la URL
+        $tipoFormateado = str_replace('-', ' ', trim($tipo));
 
-            return view('paguinas.rutas', compact('rutas', 'tipo'));
-        }
+        $rutas = Ruta::with('imagenes')
+            ->whereRaw('LOWER(tipo) = ?', [strtolower($tipoFormateado)])
+            ->get();
+
+        return view('paguinas.rutas', [
+            'rutas' => $rutas,
+            'tipo'  => $tipoFormateado
+        ]);
+    }
 
 
         public function blog()

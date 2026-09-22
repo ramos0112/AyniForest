@@ -4,11 +4,15 @@
         <h2 class="mb-1">
             @php
                 $explora = match (strtolower($tipo ?? 'default')) {
-                    'diarios' => ['descripcion' => 'Explora nuevos destinos cada día desde Trujillo',],
+                    'la libertad' => ['descripcion' => 'Descubre la riqueza cultural y natural de La Libertad desde Trujillo',],
 
-                    'weekend' => ['descripcion' => 'Escápate el fin de semana y vive nuevas aventuras',],
-                    
-                    default => ['descripcion' => 'Explora todas las rutas disponibles desde Trujillo',],
+                    'amazonas' => ['descripcion' => 'Explora fortalezas ancestrales y la selva alta en Amazonas',],
+
+                    'cajamarca' => ['descripcion' => 'Conoce los paisajes, historia y tradición de Cajamarca',],
+
+                    'huaraz' => ['descripcion' => 'Vive la aventura en la Cordillera Blanca y sus lagunas',],
+
+                    default => ['descripcion' => 'Explora todas las rutas disponibles de Ayniforest',],
                 };
             @endphp 
             {{ $explora['descripcion'] }}

@@ -20,16 +20,22 @@
                         <label for="descripcion_general" class="form-label">Descripción</label>
                         <input type="text" class="form-control" name="descripcion_general" id="descripcion_general"
                             required>
-
                     </div>
+
+
                     <div class="mb-3">
-                        <label for="tipo" class="form-label">Tipo</label>
+                        <label for="tipo" class="form-label">Departamento / Región</label>
                         <select name="tipo" id="tipo" class="form-select" required>
-                            <option value="" disabled selected>Selecciona una opción</option>
-                            <option value="Aventura">Diarios</option>
-                            <option value="Excursiones">Weekend</option>
+                            <option value="" disabled selected>Selecciona un departamento</option>
+                            <option value="La Libertad">La Libertad</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Cajamarca">Cajamarca</option>
+                            <option value="Huaraz">Huaraz</option>
                         </select>
                     </div>
+
+
+
                     <div class="mb-3">
                         <label for="precio_regular" class="form-label">Precio Regular</label>
                         <div class="input-group">

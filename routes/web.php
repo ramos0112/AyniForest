@@ -36,6 +36,8 @@ Route::get('/blog', [HomeController::class, 'blog'])->name('blog.web');
 // Mostrar rutas por tipo (ej: trekking, aventura)
 Route::get('/rutas/tipo/{tipo}', [HomeController::class, 'rutasPorTipo'])->name('rutas.tipo');
 
+
+
 // Mostrar descripción de una ruta específica
 Route::get('/rutas/{id_ruta}/descripcion', [HomeController::class, 'mostrarDescripcion'])
     ->where('id_ruta', '[0-9]+')

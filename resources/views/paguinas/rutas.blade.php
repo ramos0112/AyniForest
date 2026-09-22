@@ -1,36 +1,46 @@
+<!--resources/views/paguinas/rutas.blade.php-->
 @extends('layouts.app')
 
-@section('title', 'Rutas')
+{{-- Título dinámico para SEO según la región/tipo seleccionada --}}
+@section('title', isset($tipo) ? 'Tours y Rutas en ' . ucwords($tipo) . ' | Ayniforest' : 'Rutas y Tours | Ayniforest')
 
-@section('meta_description', isset($tipo) ? ucfirst($tipo) . ' — Explora nuestros tours y paquetes desde Trujillo. Reserva en línea y descubre La Libertad.' : 'Explora nuestras rutas y tours desde Trujillo. Reserva online con Ayniforest.')
+@section('meta_description', isset($tipo) ? ucwords($tipo) . ' — Explora nuestros tours y paquetes. Reserva en línea y descubre los mejores destinos.' : 'Explora nuestras rutas y tours desde Trujillo. Reserva online con Ayniforest.')
 @section('canonical_url', url()->current())
-@section('og_title', 'Rutas - Ayniforest')
-@section('og_description', isset($tipo) ? ucfirst($tipo) . ' desde Trujillo. Encuentra paquetes, fechas y reserva.' : 'Explora nuestras rutas y tours desde Trujillo.')
+@section('og_title', isset($tipo) ? 'Tours en ' . ucwords($tipo) . ' - Ayniforest' : 'Rutas - Ayniforest')
+@section('og_description', isset($tipo) ? 'Encuentra paquetes, fechas y reserva tu tour en ' . ucwords($tipo) . '.' : 'Explora nuestras rutas y tours desde Trujillo.')
 @section('og_image', asset('imagenes/logo.webp'))
 
 @section('plantilla')
     <link rel="stylesheet" href="{{ asset('css/paquetes.css') }}">
     @php
-        $hero = match (strtolower($tipo)) {
-            'diarios' => [
-                'titulo' => 'Tours Diarios',
-                'descripcion' => 'Explora nuevos destinos cada día desde Trujillo',
-                'clase' => 'hero-diarios',
-            ],
-
-            'weekend' => [
-                'titulo' => 'Explora la libertad',
-                'descripcion' => 'Escápate el fin de semana y vive nuevas aventuras',
-                'clase' => 'hero-weekend',
-            ],
-
-            default => [
-                'titulo' => 'Tours & Aventuras',
-                'descripcion' => 'Explora nuevos destinos desde Trujillo',
-                'clase' => 'hero-default',
-            ],
-        };
-    @endphp
+    $hero = match (strtolower($tipo ?? 'default')) {
+        'la libertad' => [
+            'titulo' => 'Tours en La Libertad',
+            'descripcion' => 'Descubre la riqueza cultural y natural de La Libertad desde Trujillo',
+            'clase' => 'hero-la-libertad',
+        ],
+        'amazonas' => [
+            'titulo' => 'Aventuras en Amazonas',
+            'descripcion' => 'Explora fortalezas ancestrales y la selva alta en Amazonas',
+            'clase' => 'hero-amazonas',
+        ],
+        'cajamarca' => [
+            'titulo' => 'Rutas en Cajamarca',
+            'descripcion' => 'Conoce los paisajes, historia y tradición de Cajamarca',
+            'clase' => 'hero-cajamarca',
+        ],
+        'huaraz' => [
+            'titulo' => 'Expediciones en Huaraz',
+            'descripcion' => 'Vive la aventura en la Cordillera Blanca y sus lagunas',
+            'clase' => 'hero-huaraz',
+        ],
+        default => [
+            'titulo' => 'Tours & Aventuras',
+            'descripcion' => 'Explora todos los destinos disponibles con Ayniforest',
+            'clase' => 'hero-default',
+        ],
+    };
+@endphp
 
     <section class="hero {{ $hero['clase'] }}">
         <h1 class="text-3xl font-bold sm:text-2xl md:text-4xl">

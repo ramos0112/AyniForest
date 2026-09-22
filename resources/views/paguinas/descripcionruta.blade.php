@@ -53,29 +53,6 @@
         <p class="text-white">{{ $ruta->descripcion_general }}</p>
     </section>
 
-    <section class="nav-info-bar py-3 sticky-top bg-black">
-        <div class="container">
-            <ul class="nav justify-content-center d-flex flex-nowrap overflow-auto text-nowrap">
-                <li class="nav-item">
-                    <span class="nav-link text-white nav-link-custom">
-                        <i class="fas fa-file-alt text-warning me-2"></i> Descripción
-                    </span>
-                </li>
-                <li class="nav-item">
-                    <span class="nav-link text-white nav-link-custom">
-                        <i class="fas fa-map-marker-alt text-warning me-2"></i> Lugares
-                    </span>
-                </li>
-                <li class="nav-item">
-                    <span class="nav-link text-white nav-link-custom">
-                        <i class="fas fa-concierge-bell text-warning me-2"></i> Servicios
-                    </span>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-
     <section class="container my-5 text-white">
         <div class="row g-4">
             <div class="col-md-7 mb-4">
@@ -86,7 +63,6 @@
                         <span class="hero-highligh">{{ $ruta->nombre_ruta }}</span>
                     </h1>
                         
-
                     <div class="mb-4">
                         <h5 class="text-warning fw-bold small text-black">La experiencia:</h5>
                         @foreach ($ruta->detalles as $detalle)

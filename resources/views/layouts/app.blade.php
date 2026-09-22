@@ -89,20 +89,21 @@
                         <a class="nav-link {{ request()->is('blog') ? 'active' : '' }}" href="/blog">Nosotros</a>
                     </li>
 
+                    <!-- Menú Navbar Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ request()->routeIs('rutas.tipo') ? 'active' : '' }}"
                             href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                             Tours
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item"
-                                    href="{{ route('rutas.tipo', ['tipo' => 'Diarios']) }}">Diarios</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('rutas.tipo', ['tipo' => 'Weekend']) }}">Fin de
-                                    semana</a>
-                            </li>
+                            <li><a class="dropdown-item" href="{{ route('rutas.tipo', ['tipo' => 'la-libertad']) }}">La
+                                    Libertad</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('rutas.tipo', ['tipo' => 'amazonas']) }}">Amazonas</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('rutas.tipo', ['tipo' => 'cajamarca']) }}">Cajamarca</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('rutas.tipo', ['tipo' => 'huaraz']) }}">Huaraz</a></li>
                         </ul>
                     </li>
 
@@ -119,14 +120,18 @@
     <!-- Contenido de la página -->
     @yield('plantilla') <!-- Sección para insertar contenido específico de cada vista -->
     <!-- Menú de íconos  ['icon' => 'envelope', 'text' => 'Contacto', 'url' => '#'], -->
+    <!-- Menú de Íconos Inferior -->
     <div class="menu-section hidden lg:flex mb-5">
         <div class="menu-item"><i class="fas fa-home"></i><a href="/">Inicio</a></div>
         <div class="menu-item"><i class="fas fa-book"></i><a href="/blog">Nosotros</a></div>
-        <div class="menu-item"><i class="fas fa-road"></i><a class="nav-link"
-                href="{{ route('rutas.tipo', ['tipo' => 'Diarios']) }}">Diarios</a></div>
+        <div class="menu-item"><i class="fas fa-map-marker-alt"></i><a class="nav-link"
+                href="{{ route('rutas.tipo', ['tipo' => 'la-libertad']) }}">La Libertad</a></div>
+        <div class="menu-item"><i class="fas fa-mountain"></i><a class="nav-link"
+                href="{{ route('rutas.tipo', ['tipo' => 'amazonas']) }}">Amazonas</a></div>
+        <div class="menu-item"><i class="fas fa-route"></i><a class="nav-link"
+                href="{{ route('rutas.tipo', ['tipo' => 'cajamarca']) }}">Cajamarca</a></div>
         <div class="menu-item"><i class="fas fa-hiking"></i><a class="nav-link"
-                href="{{ route('rutas.tipo', ['tipo' => 'Weekend']) }}">Fin de semana</a></div>
-        <!--<div class="menu-item"><i class="fas fa-envelope"></i><a href="#">Contacto</a></div>-->
+                href="{{ route('rutas.tipo', ['tipo' => 'huaraz']) }}">Huaraz</a></div>
     </div>
     <hr class="text-black-50 mt-10 mb-15"> <!-- Línea divisoria sutil -->
     <!-- NUEVA SECCIÓN DE CERTIFICADOS EN FILA HORIZONTAL -->
@@ -140,7 +145,7 @@
 
                 <img src="{{ asset('imagenes/caltur.png') }}" alt="Caltur logo" class="img-fluid"
                     style="height: 90px; width: auto; object-fit: contain;">
-                    
+
                 <img src="{{ brandingImage('certificacion_url') }}" alt="Certificado" class="img-fluid"
                     style="height: 90px; width: auto; object-fit: contain;">
             </div>

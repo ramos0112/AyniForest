@@ -3,21 +3,25 @@
 
 @section('title', 'Ayniforest | Agencia de Viajes y Turismo en Trujillo, Perú')
 
-@section('meta_description', 'Ayniforest ofrece paquetes turísticos y Full Days desde Trujillo. Descubre rutas de aventura y cultura en La Libertad con reserva segura y pagos por Mercado Pago.')
+@section('meta_description', 'Ayniforest ofrece paquetes turísticos y Full Days desde Trujillo. Descubre rutas de
+    aventura y cultura en La Libertad con reserva segura y pagos por Mercado Pago.')
 
-@section('meta_keywords', 'tours Trujillo, paquetes turísticos Trujillo, Full Day La Libertad, agencia de viajes, reservas online')
+@section('meta_keywords', 'tours Trujillo, paquetes turísticos Trujillo, Full Day La Libertad, agencia de viajes,
+    reservas online')
 
 @section('og_title', 'Ayniforest - Tours y Full Days desde Trujillo')
-@section('og_description', 'Reserva tours y paquetes turísticos desde Trujillo en Ayniforest. Experiencias de naturaleza, cultura y aventura en La Libertad.')
+@section('og_description', 'Reserva tours y paquetes turísticos desde Trujillo en Ayniforest. Experiencias de
+    naturaleza, cultura y aventura en La Libertad.')
 @section('og_image', asset('imagenes/logo.webp'))
 @section('og_url', url()->current())
 @section('canonical_url', url()->current())
 
 @section('twitter_title', 'Ayniforest - Agencia de Viajes en Trujillo')
-@section('twitter_description', 'Tours y paquetes turísticos desde Trujillo. Reserva Full Days y aventuras en La Libertad con Ayniforest.')
+@section('twitter_description', 'Tours y paquetes turísticos desde Trujillo. Reserva Full Days y aventuras en La
+    Libertad con Ayniforest.')
 
 @section('plantilla')
- 
+
     <link rel="stylesheet" href="{{ asset('css/paquetes.css') }}">
 
     <!-- Sección Hero -->
@@ -53,7 +57,7 @@
                         trabajamos para ofrecer experiencias auténticas, organizadas y seguras,
                         adaptadas a cada viajero y diseñadas para mostrar la esencia del norte peruano.
                         <br>
-                        Nos esforzamos por cuidar cada detalle de nuestras rutas, brindando atención cercana, 
+                        Nos esforzamos por cuidar cada detalle de nuestras rutas, brindando atención cercana,
                         buena energía y aventuras que combinan naturaleza, cultura y emoción. Más que planificar viajes,
                         buscamos crear momentos inolvidables y hacer que cada destino se convierta en una experiencia única.
                         Hoy creamos experiencias, mañana serán recuerdos para toda la vida.
@@ -63,21 +67,33 @@
             </div>
 
             <!-- Fila de bloques de imagen -->
+            <!-- Fila de bloques de imagen por departamento -->
             <div class="row gx-4 gy-3 reveal">
                 @php
                     $bloques = [
                         [
-                            'titulo' => 'Tours Diarios',
-                            'imagenes' => $rutasDiarios,
-                            'ruta' => route('rutas.tipo', ['tipo' => 'Diarios']),
+                            'titulo' => 'La Libertad',
+                            'imagenes' => $rutasLaLibertad,
+                            'ruta' => route('rutas.tipo', ['tipo' => 'La Libertad']),
                         ],
                         [
-                            'titulo' => 'Tours fin de semana',
-                            'imagenes' => $rutasWeekend,
-                            'ruta' => route('rutas.tipo', ['tipo' => 'Weekend']),
+                            'titulo' => 'Amazonas',
+                            'imagenes' => $rutasAmazonas,
+                            'ruta' => route('rutas.tipo', ['tipo' => 'Amazonas']),
+                        ],
+                        [
+                            'titulo' => 'Cajamarca',
+                            'imagenes' => $rutasCajamarca,
+                            'ruta' => route('rutas.tipo', ['tipo' => 'Cajamarca']),
+                        ],
+                        [
+                            'titulo' => 'Huaraz',
+                            'imagenes' => $rutasHuaraz,
+                            'ruta' => route('rutas.tipo', ['tipo' => 'Huaraz']),
                         ],
                     ];
                 @endphp
+
                 @foreach ($bloques as $index => $bloque)
                     @php
                         $imagenes = $bloque['imagenes']
@@ -89,7 +105,6 @@
                             ->take(10)
                             ->values()
                             ->toArray();
-
                     @endphp
 
                     <div class="col-md-6 mb-4">
@@ -103,19 +118,18 @@
                                         <div class="ratio ratio-4x3 rounded overflow-hidden img-slot"
                                             style="max-width: 245px; margin: 0 auto;">
                                             <img src="" class="w-100 h-100 object-fit-cover img-fluid"
-                                                alt="Imagen">
+                                                alt="{{ $bloque['titulo'] }}">
                                         </div>
                                     </div>
                                 @endfor
                             </div>
 
                             <div class="text-center mt-3">
-                                <a href="{{ $bloque['ruta'] }}" class="btn package-btn px-4 py-1">Ver más</a>
+                                <a href="{{ $bloque['ruta'] }}" class="btn package-btn px-4 py-1">Ver tours</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
             </div>
         </div>
     </section>

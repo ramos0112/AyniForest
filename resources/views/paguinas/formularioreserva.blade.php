@@ -6,11 +6,12 @@
 @section('plantilla')
 
     <link rel="stylesheet" href="{{ asset('css/formulario.css') }}">
-    
+
     <!--solo el siguiente section no modificar -->
     <div class="form-body-wrapper">
         <section class="hero text-white text-center py-4 bg-dark">
-            <h1 class="text-3xl font-bold sm:text-2xl md:text-4xl">Reserva con "Ayni <span style="color: #9bb73a;">Forest"</span></h1>
+            <h1 class="text-3xl font-bold sm:text-2xl md:text-4xl">Reserva con "Ayni <span
+                    style="color: #9bb73a;">Forest"</span></h1>
             <p class="text-white">{{ $ruta->nombre_ruta ?? 'Ruta desconocida' }} te espera.</p>
         </section>
 
@@ -97,7 +98,7 @@
 
                         <div class="custom-input-group">
                             <label>Fecha de Viaje</label>
-                            <select class="form-control-exp" id="id_fecha" name="id_fecha">
+                            <select class="form-control-exp" id="id_fecha" name="id_fecha" required>
                                 <option>Seleccionar fecha</option>
                                 @foreach ($ruta->fechasDisponibles as $fecha)
                                     @if (\Carbon\Carbon::parse($fecha->fecha)->gte(\Carbon\Carbon::today()))
@@ -166,8 +167,18 @@
 
         // Actualizar fecha seleccionada
         document.getElementById('id_fecha').addEventListener('change', function() {
-            const selectedFecha = this.options[this.selectedIndex].text;
-            fechaSeleccionada.textContent = selectedFecha;
+            const select = this;
+            const value = select.value;
+            const text = select.options[select.selectedIndex].text;
+
+            // Validar si seleccionó una fecha real o devolvió a "Seleccionar fecha"
+            if (!value || value === "") {
+                fechaSeleccionada.textContent = "No seleccionada";
+            } else {
+                fechaSeleccionada.textContent = text;
+            }
+
+            // Recalcular montos y totales
             actualizarTotal();
         });
         // Función para agregar un acompañante
@@ -241,15 +252,25 @@
         }
         // Actualizar total
         function actualizarTotal() {
+            const selectFecha = document.getElementById('id_fecha');
             const cantidad_personas = 1 + Clientes.length;
             const precioActual = parseFloat("{{ $ruta->precio_actual }}"); // Precio actual
             const total = cantidad_personas * precioActual;
+
+            // Actualizar los textos con las comillas invertidas corregidas
             totalPago.textContent = `S/. ${total.toFixed(2)}`;
             total50.textContent = `S/. ${(total / 2).toFixed(2)}`;
-            document.getElementById('btnPagar').textContent = `Pagar S/.${(total / 2).toFixed(2)}`;
 
-            // Aquí asignamos el valor de total50 al campo monto_pagado
-            document.getElementById('monto_pagado').value = (total / 2).toFixed(2); // Asignamos el valor de total50
+            // Comprobar si hay una fecha seleccionada
+            if (!selectFecha.value || selectFecha.value === "") {
+                // Si NO hay fecha seleccionada, desactivar el monto de pago
+                document.getElementById('monto_pagado').value = "0.00";
+                document.getElementById('btnPagar').textContent = "Selecciona una fecha";
+            } else {
+                // Si SÍ hay fecha seleccionada, asignar el adelanto (50%)
+                document.getElementById('monto_pagado').value = (total / 2).toFixed(2);
+                document.getElementById('btnPagar').textContent = `Pagar S/. ${(total / 2).toFixed(2)}`;
+            }
         }
         flatpickr("#fecha_nacimiento", {
             locale: "es", // Configura el idioma en español
